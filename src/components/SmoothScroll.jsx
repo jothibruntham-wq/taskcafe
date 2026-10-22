@@ -27,8 +27,18 @@ export default function SmoothScroll({ children }) {
 
     const animId = requestAnimationFrame(raf);
 
-    // Scroll to top on route change
-    lenis.scrollTo(0, { immediate: true });
+    // If there is an initial hash in URL, scroll to it
+    if (window.location.hash) {
+      setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+          lenis.scrollTo(target, { offset: -70 });
+        }
+      }, 200);
+    } else {
+      // Otherwise start at top
+      lenis.scrollTo(0, { immediate: true });
+    }
 
     return () => {
       cancelAnimationFrame(animId);

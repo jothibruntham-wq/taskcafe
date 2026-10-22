@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, ChevronDown, MessageSquare, Sparkles } from 'lucide-react';
+import { MapPin, Phone, Clock, Send, CheckCircle2, ChevronDown } from 'lucide-react';
 
 const LOCATIONS = [
   {
@@ -58,7 +58,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="pt-32 pb-24 px-6 md:px-12 bg-gradient-to-b from-[#0b0806] via-[#140e0b] to-[#0a0705] min-h-screen text-cafe-cream">
+    <section id="contact" className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#0e0906] via-[#120c09] to-[#0e0907] text-cafe-cream">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -265,6 +265,6 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

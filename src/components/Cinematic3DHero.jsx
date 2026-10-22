@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Sparkles, ArrowDown, Coffee, Award, Compass, Play } from 'lucide-react';
+import { Sparkles, ArrowDown, Coffee } from 'lucide-react';
 import { useAudio } from '../context/AudioContext';
+import { scrollToSection } from '../utils/scroll';
 
 export default function Cinematic3DHero() {
   const mountRef = useRef(null);
@@ -315,7 +315,7 @@ export default function Cinematic3DHero() {
   }, []);
 
   return (
-    <section className="relative w-full h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-gradient-to-b from-cafe-darkest via-cafe-dark to-[#0b0806]">
+    <section id="home" className="relative w-full h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-gradient-to-b from-cafe-darkest via-cafe-dark to-[#0b0806]">
       {/* 3D WebGL Canvas Mount */}
       <div 
         ref={mountRef} 
@@ -371,20 +371,20 @@ export default function Cinematic3DHero() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center gap-4 pointer-events-auto"
         >
-          <Link
-            to="/menu"
-            className="group relative px-8 py-3.5 rounded-full bg-gradient-to-r from-cafe-caramel to-[#e5963e] text-cafe-darkest font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(217,130,43,0.5)] hover:scale-105 active:scale-95 flex items-center gap-2"
+          <button
+            onClick={() => scrollToSection('menu')}
+            className="group relative px-8 py-3.5 rounded-full bg-gradient-to-r from-cafe-caramel to-[#e5963e] text-cafe-darkest font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(217,130,43,0.5)] hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
           >
             <Coffee className="w-4 h-4 transition-transform group-hover:rotate-12" />
             <span>Explore Reserve Menu</span>
-          </Link>
+          </button>
 
-          <Link
-            to="/reservations"
-            className="px-8 py-3.5 rounded-full glass-panel border border-white/15 text-cafe-cream hover:text-cafe-gold font-medium text-sm tracking-wider uppercase transition-all duration-300 hover:border-cafe-caramel/50 hover:bg-white/10 active:scale-95 flex items-center gap-2"
+          <button
+            onClick={() => scrollToSection('reservations')}
+            className="px-8 py-3.5 rounded-full glass-panel border border-white/15 text-cafe-cream hover:text-cafe-gold font-medium text-sm tracking-wider uppercase transition-all duration-300 hover:border-cafe-caramel/50 hover:bg-white/10 active:scale-95 flex items-center gap-2 cursor-pointer"
           >
             <span>Book A Tasting Table</span>
-          </Link>
+          </button>
         </motion.div>
 
         {/* Spec Pill Highlights */}
@@ -431,16 +431,17 @@ export default function Cinematic3DHero() {
       </motion.button>
 
       {/* Scroll Down Indicator */}
-      <motion.div 
+      <motion.button 
+        onClick={() => scrollToSection('philosophy')}
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-8 right-8 z-20 hidden sm:flex items-center gap-2.5 text-xs tracking-widest uppercase text-[#a39485] font-light"
+        className="absolute bottom-8 right-8 z-20 hidden sm:flex items-center gap-2.5 text-xs tracking-widest uppercase text-[#a39485] hover:text-cafe-gold font-light cursor-pointer group"
       >
         <span>Scroll to Discover</span>
-        <div className="w-8 h-8 rounded-full glass-panel flex items-center justify-center border border-white/10">
+        <div className="w-8 h-8 rounded-full glass-panel flex items-center justify-center border border-white/10 group-hover:border-cafe-caramel/50 transition-colors">
           <ArrowDown className="w-3.5 h-3.5 text-cafe-gold" />
         </div>
-      </motion.div>
+      </motion.button>
     </section>
   );
 }

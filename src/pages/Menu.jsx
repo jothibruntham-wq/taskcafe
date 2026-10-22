@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Coffee, Sparkles, Filter, Plus, Check, X, Flame, Leaf, Heart } from 'lucide-react';
+import { Coffee, Sparkles, Plus, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 const MENU_ITEMS = [
@@ -201,7 +201,7 @@ export default function Menu() {
   };
 
   return (
-    <div className="pt-32 pb-24 px-6 md:px-12 bg-gradient-to-b from-[#0b0806] via-[#120d0a] to-[#0a0705] min-h-screen text-cafe-cream">
+    <section id="menu" className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#18100b] via-[#150f0c] to-[#120d0a] text-cafe-cream">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -449,6 +449,6 @@ export default function Menu() {
           </div>
         )}
       </AnimatePresence>
-    </div>
+    </section>
   );
 }

@@ -1,13 +1,17 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { 
-  Coffee, Sparkles, Flame, Award, ArrowRight, Heart, Star, 
-  Clock, ShieldCheck, Compass, CheckCircle2, ChevronRight 
+  Coffee, Sparkles, ArrowRight, Star, Flame,
+  Compass, CheckCircle2, ChevronRight 
 } from 'lucide-react';
 import Cinematic3DHero from '../components/Cinematic3DHero';
 import FlavorCompass from '../components/FlavorCompass';
+import Menu from './Menu';
+import Story from './Story';
+import Reservations from './Reservations';
+import Contact from './Contact';
 import { useCart } from '../context/CartContext';
+import { scrollToSection } from '../utils/scroll';
 
 // Featured Signature Items
 const SIGNATURE_BREWS = [
@@ -119,16 +123,15 @@ export default function Home() {
   });
 
   const parallaxBg1 = useTransform(scrollYProgress, [0, 0.4], [0, -120]);
-  const parallaxBg2 = useTransform(scrollYProgress, [0.3, 0.7], [60, -80]);
   const parallaxRotate = useTransform(scrollYProgress, [0, 1], [0, 45]);
 
   return (
     <div ref={containerRef} className="relative w-full overflow-hidden">
-      {/* 1. CINEMATIC 3D HERO */}
+      {/* 1. CINEMATIC 3D HERO (#home) */}
       <Cinematic3DHero />
 
-      {/* 2. CHAPTER 1: OBSIDIAN ROAST PHILOSOPHY (Deep Roast Theme) */}
-      <section className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#0b0806] via-[#120c09] to-[#18100b] text-cafe-cream">
+      {/* 2. CHAPTER 1: OBSIDIAN ROAST PHILOSOPHY (#philosophy) */}
+      <section id="philosophy" className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#0b0806] via-[#120c09] to-[#18100b] text-cafe-cream">
         <motion.div 
           style={{ y: parallaxBg1 }} 
           className="absolute -top-24 right-10 w-96 h-96 rounded-full bg-cafe-caramel/10 blur-[130px] pointer-events-none"
@@ -173,13 +176,13 @@ export default function Home() {
               </div>
 
               <div className="pt-4">
-                <Link
-                  to="/story"
-                  className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-cafe-gold hover:text-white group font-medium"
+                <button
+                  onClick={() => scrollToSection('story')}
+                  className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-cafe-gold hover:text-white group font-medium cursor-pointer"
                 >
                   <span>Explore The Full Harvest Journey</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
-                </Link>
+                </button>
               </div>
             </motion.div>
 
@@ -218,26 +221,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. CHAPTER 2: AMBER CARAMEL SIGNATURE BREWS (Warm Amber Theme) */}
-      <section className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#18100b] via-[#24160e] to-[#1c120c] text-cafe-cream">
+      {/* 3. CHAPTER 2: AMBER CARAMEL SIGNATURE BREWS HIGHLIGHT */}
+      <section className="relative py-24 px-6 md:px-12 bg-gradient-to-b from-[#18100b] via-[#24160e] to-[#18100b] text-cafe-cream border-t border-b border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
             <div>
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-cafe-caramel/30 text-xs tracking-[0.25em] uppercase text-cafe-gold mb-4">
                 <Sparkles className="w-3.5 h-3.5 text-cafe-caramel" />
-                <span>Chapter II : Reserve Creations</span>
+                <span>Chapter II : Reserve Highlights</span>
               </div>
               <h2 className="font-serif text-4xl md:text-5xl font-normal text-cafe-cream">
                 Signature Seasonal Extractions
               </h2>
             </div>
-            <Link
-              to="/menu"
-              className="mt-4 md:mt-0 inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass-panel border border-white/10 text-xs uppercase tracking-wider text-cafe-gold hover:border-cafe-caramel transition-all"
+            <button
+              onClick={() => scrollToSection('menu')}
+              className="mt-4 md:mt-0 inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass-panel border border-white/10 text-xs uppercase tracking-wider text-cafe-gold hover:border-cafe-caramel transition-all cursor-pointer"
             >
-              <span>View Complete 24-Item Menu</span>
+              <span>Explore All Categories</span>
               <ChevronRight className="w-4 h-4" />
-            </Link>
+            </button>
           </div>
 
           {/* 3D Tilt Cards Grid */}
@@ -296,9 +299,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. CHAPTER 3: BOTANICAL MATCHA & TEA LOUNGE (Forest Matcha Green Palette Shift!) */}
-      <section className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#15231b] via-[#101c15] to-[#0c1611] text-[#e8f1eb]">
-        {/* Glow orb */}
+      {/* 4. CURATED FULL ARTISAN MENU (#menu) */}
+      <Menu />
+
+      {/* 5. CHAPTER 3: BOTANICAL MATCHA & TEA LOUNGE (Forest Matcha Green Palette Shift) */}
+      <section className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#120d0a] via-[#101c15] to-[#0c1611] text-[#e8f1eb]">
         <div className="absolute top-1/2 left-0 w-96 h-96 rounded-full bg-[#39604b]/20 blur-[140px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto">
@@ -361,25 +366,28 @@ export default function Home() {
               </div>
 
               <div className="pt-4">
-                <Link
-                  to="/menu"
-                  className="px-6 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-black font-semibold text-xs uppercase tracking-widest inline-flex items-center gap-2 shadow-lg shadow-emerald-950/40"
+                <button
+                  onClick={() => scrollToSection('menu')}
+                  className="px-6 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-black font-semibold text-xs uppercase tracking-widest inline-flex items-center gap-2 shadow-lg shadow-emerald-950/40 cursor-pointer"
                 >
-                  <span>Explore Matcha & Teas</span>
+                  <span>Explore Matcha on Menu</span>
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </button>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 5. INTERACTIVE FLAVOR COMPASS */}
+      {/* 6. INTERACTIVE FLAVOR COMPASS (#roast-compass) */}
       <section id="roast-compass" className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#0c1611] via-[#140e0b] to-[#120d0a]">
         <FlavorCompass />
       </section>
 
-      {/* 6. CHAPTER 4: KINETIC BARISTA SHOWCASE & BREW LAB */}
+      {/* 7. CHAPTER: SACRED ODYSSEY / OUR STORY & ROASTER CURVE (#story) */}
+      <Story />
+
+      {/* 8. CHAPTER 4: KINETIC BARISTA SHOWCASE & BREW LAB */}
       <section className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#120d0a] via-[#1a120c] to-[#130d0a] text-cafe-cream">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -403,7 +411,7 @@ export default function Home() {
                 <button
                   key={m.name}
                   onClick={() => setActiveMethod(idx)}
-                  className={`p-5 rounded-2xl text-left border transition-all duration-300 ${
+                  className={`p-5 rounded-2xl text-left border transition-all duration-300 cursor-pointer ${
                     active
                       ? 'bg-cafe-caramel/20 border-cafe-caramel text-cafe-gold shadow-lg shadow-cafe-caramel/10'
                       : 'glass-panel border-white/5 text-[#9e9082] hover:border-white/20'
@@ -442,18 +450,21 @@ export default function Home() {
               </div>
             </div>
 
-            <Link
-              to="/reservations"
-              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-cafe-caramel to-cafe-gold text-cafe-darkest font-semibold text-xs uppercase tracking-wider whitespace-nowrap hover:shadow-lg transition-all"
+            <button
+              onClick={() => scrollToSection('reservations')}
+              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-cafe-caramel to-cafe-gold text-cafe-darkest font-semibold text-xs uppercase tracking-wider whitespace-nowrap hover:shadow-lg transition-all cursor-pointer"
             >
               Book Tasting Experience
-            </Link>
+            </button>
           </motion.div>
         </div>
       </section>
 
-      {/* 7. CUSTOMER TESTIMONIALS & REVIEWS */}
-      <section className="relative py-28 px-6 md:px-12 bg-gradient-to-b from-[#130d0a] to-[#0c0806] text-cafe-cream">
+      {/* 9. TABLE & FLIGHT RESERVATIONS (#reservations) */}
+      <Reservations />
+
+      {/* 10. CUSTOMER TESTIMONIALS & REVIEWS */}
+      <section className="relative py-28 px-6 md:px-12 bg-gradient-to-b from-[#110b08] to-[#0e0906] text-cafe-cream border-t border-b border-white/5">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-serif text-3xl md:text-4xl text-cafe-cream font-normal">
@@ -494,33 +505,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. RESERVATION CALL TO ACTION */}
-      <section className="relative py-24 px-6 md:px-12 bg-gradient-to-r from-cafe-caramel/20 via-cafe-mocha/30 to-cafe-darkest border-t border-b border-white/10">
-        <div className="max-w-5xl mx-auto rounded-3xl p-10 md:p-16 text-center glass-panel border border-cafe-caramel/30 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-cafe-caramel/15 rounded-full blur-[100px] pointer-events-none" />
-          
-          <h2 className="font-serif text-4xl md:text-5xl text-cafe-cream font-normal mb-4">
-            An Unforgettable Tasting Awaits You
-          </h2>
-          <p className="text-sm text-[#c0b1a2] max-w-xl mx-auto font-light leading-relaxed mb-8">
-            Reserve a counter seat at our marble extraction bar, cozy fireplace nook, or greenhouse patio.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/reservations"
-              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-cafe-caramel to-cafe-gold text-cafe-darkest font-semibold text-xs uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-cafe-caramel/30"
-            >
-              Book Tasting Table Now
-            </Link>
-            <Link
-              to="/menu"
-              className="px-8 py-3.5 rounded-full glass-panel border border-white/15 text-cafe-cream text-xs uppercase tracking-widest hover:bg-white/10 transition-all"
-            >
-              Order Ahead For Pickup
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 11. ATELIER LOCATIONS, CONCIERGE & FAQS (#contact) */}
+      <Contact />
     </div>
   );
 }

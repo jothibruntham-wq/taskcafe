@@ -7,10 +7,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import Home from './pages/Home';
-import Menu from './pages/Menu';
-import Story from './pages/Story';
-import Reservations from './pages/Reservations';
-import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -19,20 +15,20 @@ function App() {
         <AudioProvider>
           <SmoothScroll>
             <div className="relative min-h-screen bg-[#0b0806] text-[#f4efe8] flex flex-col justify-between selection:bg-cafe-caramel selection:text-cafe-darkest">
-              {/* Persistent Modern Glassmorphic Navbar */}
+              {/* Glassmorphic Section-Tracking Navbar */}
               <Navbar />
 
               {/* Slide-out Order Cart Drawer */}
               <CartDrawer />
 
-              {/* Main Page Routing */}
+              {/* Unified Single-Page Landing View */}
               <main className="flex-1 w-full">
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/menu" element={<Menu />} />
-                  <Route path="/story" element={<Story />} />
-                  <Route path="/reservations" element={<Reservations />} />
-                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/menu" element={<Navigate to="/#menu" replace />} />
+                  <Route path="/story" element={<Navigate to="/#story" replace />} />
+                  <Route path="/reservations" element={<Navigate to="/#reservations" replace />} />
+                  <Route path="/contact" element={<Navigate to="/#contact" replace />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </main>

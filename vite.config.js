@@ -4,5 +4,25 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base:"/taskcafe/",
+  base: "/taskcafe/",
+  build: {
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('three')) {
+              return 'vendor-three';
+            }
+            if (id.includes('framer-motion') || id.includes('lenis')) {
+              return 'vendor-animation';
+            }
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor-react';
+            }
+          }
+        },
+      },
+    },
+  },
 })

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Sun, Compass, Flame, Award, Heart, CheckCircle2, ShieldCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Sparkles } from 'lucide-react';
 
 const TIMELINE_STAGES = [
   {
@@ -66,7 +65,7 @@ export default function Story() {
   const [selectedRoast, setSelectedRoast] = useState(0);
 
   return (
-    <div className="pt-32 pb-24 px-6 md:px-12 bg-gradient-to-b from-[#0b0806] via-[#140e0b] to-[#0a0604] min-h-screen text-cafe-cream">
+    <section id="story" className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#0d1612] via-[#140e0b] to-[#120d0a] text-cafe-cream">
       <div className="max-w-6xl mx-auto">
         {/* Story Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
@@ -218,6 +217,6 @@ export default function Story() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

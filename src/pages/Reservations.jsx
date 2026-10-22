@@ -78,7 +78,7 @@ export default function Reservations() {
   };
 
   return (
-    <div className="pt-32 pb-24 px-6 md:px-12 bg-gradient-to-b from-[#0b0806] via-[#140e0b] to-[#0a0705] min-h-screen text-cafe-cream">
+    <section id="reservations" className="relative py-28 md:py-36 px-6 md:px-12 bg-gradient-to-b from-[#130d0a] via-[#1a120c] to-[#110b08] text-cafe-cream">
       <div className="max-w-6xl mx-auto">
         {/* Page Title */}
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -310,6 +310,6 @@ export default function Reservations() {
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </section>
   );
 }

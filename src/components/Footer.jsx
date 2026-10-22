@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowUp, Mail, MapPin, Clock, Phone, Music, Heart, CheckCircle2 } from 'lucide-react';
+import { scrollToSection } from '../utils/scroll';
 
 const Instagram = ({ className = "w-4 h-4", ...props }) => (
   <svg
@@ -64,7 +64,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
           {/* Brand Column */}
           <div className="lg:col-span-2 flex flex-col items-start">
-            <Link to="/" className="flex items-center gap-3 mb-6 group">
+            <button 
+              onClick={() => scrollToSection('home')} 
+              className="flex items-center gap-3 mb-6 group cursor-pointer text-left"
+            >
               <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cafe-mocha to-cafe-caramel flex items-center justify-center border border-cafe-gold/40">
                 <span className="font-serif font-bold text-lg text-cafe-cream">A</span>
               </div>
@@ -76,7 +79,7 @@ export default function Footer() {
                   Roastery & Atelier
                 </span>
               </div>
-            </Link>
+            </button>
 
             <p className="text-sm text-[#b0a294] font-light leading-relaxed max-w-sm mb-6">
               A contemporary sanctuary of sensory coffee craft. Single-origin micro-lots roasted with precision and served with architectural serenity.
@@ -98,7 +101,7 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="absolute right-1 px-4 py-2 rounded-full bg-cafe-caramel hover:bg-cafe-amber text-cafe-darkest text-xs font-semibold tracking-wider uppercase transition-all shadow-md"
+                  className="absolute right-1 px-4 py-2 rounded-full bg-cafe-caramel hover:bg-cafe-amber text-cafe-darkest text-xs font-semibold tracking-wider uppercase transition-all shadow-md cursor-pointer"
                 >
                   {subscribed ? <CheckCircle2 className="w-4 h-4 text-emerald-950 inline" /> : 'Join'}
                 </button>
@@ -115,11 +118,11 @@ export default function Footer() {
           <div>
             <h4 className="font-serif text-lg text-cafe-cream mb-6 tracking-wide">Explore</h4>
             <ul className="space-y-3 text-xs tracking-wider uppercase font-light text-[#a89b8d]">
-              <li><Link to="/menu" className="hover:text-cafe-gold transition-colors">Reserve Menu</Link></li>
-              <li><Link to="/story" className="hover:text-cafe-gold transition-colors">Bean Origins & Story</Link></li>
-              <li><Link to="/reservations" className="hover:text-cafe-gold transition-colors">Tasting Table Booking</Link></li>
-              <li><Link to="/contact" className="hover:text-cafe-gold transition-colors">Atelier Locations</Link></li>
-              <li><a href="#roast-compass" className="hover:text-cafe-gold transition-colors">Flavor Compass</a></li>
+              <li><button onClick={() => scrollToSection('menu')} className="hover:text-cafe-gold transition-colors cursor-pointer">Reserve Menu</button></li>
+              <li><button onClick={() => scrollToSection('story')} className="hover:text-cafe-gold transition-colors cursor-pointer">Bean Origins & Story</button></li>
+              <li><button onClick={() => scrollToSection('reservations')} className="hover:text-cafe-gold transition-colors cursor-pointer">Tasting Table Booking</button></li>
+              <li><button onClick={() => scrollToSection('contact')} className="hover:text-cafe-gold transition-colors cursor-pointer">Atelier Locations</button></li>
+              <li><button onClick={() => scrollToSection('roast-compass')} className="hover:text-cafe-gold transition-colors cursor-pointer">Flavor Compass</button></li>
             </ul>
           </div>
 
